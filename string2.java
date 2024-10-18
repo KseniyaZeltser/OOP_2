@@ -1,13 +1,9 @@
 public class string2 {
 
-    public static void main(String[] args) {
-        String sentence = "One two three раз два три one1 two2 123";
-        int latinWordsCount = countLatinWords(sentence);
-        System.out.println("Количество слов, содержащих только латинские буквы: " + latinWordsCount);
-    }
+
 
     public static int countLatinWords(String sentence) {
-        String[] words = sentence.split("\\s+"); // разбиваем строку на слова
+        String[] words = sentence.split(" "); // разбиваем строку на слова
         int count = 0;
 
         for (String word : words) {
@@ -28,5 +24,10 @@ public class string2 {
             }
         }
         return true;
+    }
+    public static void main(String[] args) {
+        String sentence = "One two three раз два три one1 two2 123";
+        int latinWordsCount = countLatinWords(sentence);
+        System.out.println("Количество слов, содержащих только латинские буквы: " + latinWordsCount);
     }
 }

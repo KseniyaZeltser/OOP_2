@@ -1,7 +1,7 @@
 public class string1 {
 
     public static String findMinDistinctCharsWord(String input) {
-        String[] words = input.split("\\s+"); // разбиваем строку на слова
+        String[] words = input.split(" "); // разбиваем строку на слова
         String minWord = null;
         int minDistinctChars = Integer.MAX_VALUE;
 
