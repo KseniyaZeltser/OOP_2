@@ -142,17 +142,126 @@ public class Vector {
     }
 
 }
-public class main {
-    public static void main(String[] args) {
-        // Example usage of the Vector class
-        Vector v1 = new Vector(1, 2, 3);
-        Vector v2 = new Vector(4, 5, 6);
-        Vector v = new Vector();
-        System.out.println("Length of v1: " + v1.length());
-        System.out.println("Scalar product of v1 and v2: " + v1.scalarProduct(v2));
-        Vector v3 = v1.vectorProduct(v2);
-        System.out.println("Vector product of v1 and v2: (" + v3.getX() + ", " + v3.getY() + ", " + v3.getZ() + ")");
+
+
+
+package clothing;
+
+public abstract class Clothes {
+    protected Size size;
+    protected double price;
+    protected String color;
+
+    public Clothes(Size size, double price, String color) {
+        this.size = size;
+        this.price = price;
+        this.color = color;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getColor() {
+        return color;
     }
 }
+package clothing;
+
+public class TShirt extends Clothes implements MenClothing, WomenClothing {
+    public TShirt(Size size, double price, String color) {
+        super(size, price, color);
+    }
+
+    public void dressMan() {
+        System.out.println("Мужская футболка:  " + size.getDescription() + ", евро размер " + size.getEuroSize() + ", цена " + price + ", цвет " + color);
+    }
+
+    public void dressWoman() {
+        System.out.println("Женская футболка:  " + size.getDescription() + ", евро размер " + size.getEuroSize() + ", цена " + price + ", цвет " + color);
+    }
+}
+package clothing;
+
+public class Pants extends Clothes implements MenClothing, WomenClothing {
+    public Pants(Size size, double price, String color) {
+        super(size, price, color);
+    }
+
+    public void dressMan() {
+        System.out.println("Мужские брюки: размер " + size.getDescription() + ", евро размер " + size.getEuroSize() + ", цена " + price + ", цвет " + color);
+    }
+
+    public void dressWoman() {
+        System.out.println("Женские брюки: размер " + size.getDescription() + ", евро размер " + size.getEuroSize() + ", цена " + price + ", цвет " + color);
+    }
+}
+
+package clothing;
+
+public class Skirt extends Clothes implements WomenClothing {
+    public Skirt(Size size, double price, String color) {
+        super(size, price, color);
+    }
+
+    public void dressWoman() {
+        System.out.println("Юбка: размер " + size.getDescription() + ", евро размер " + size.getEuroSize() + ", цена " + price + ", цвет " + color);
+    }
+}
+package clothing;
+
+public class Tie extends Clothes implements MenClothing {
+    public Tie(Size size, double price, String color) {
+        super(size, price, color);
+    }
+
+    public void dressMan() {
+        System.out.println("Галстук: размер " + size.getDescription() + ", евро размер " + size.getEuroSize() + ", цена " + price + ", цвет " + color);
+    }
+}
+package clothing;
+
+public class Atelier {
+    public void dressMan(Clothes[] clothes) {
+        for (Clothes c : clothes) {
+            if (c instanceof MenClothing) {
+                ((MenClothing) c).dressMan();
+            }
+        }
+    }
+
+    public void dressWoman(Clothes[] clothes) {
+        for (Clothes c : clothes) {
+            if (c instanceof WomenClothing) {
+                ((WomenClothing) c).dressWoman();
+            }
+        }
+    }
+}
+package clothing;
+
+public class Main {
+    public static void main(String[] args) {
+        Clothes[] clothes = {
+                new TShirt(Size.M, 500, "Синий"),
+                new Pants(Size.L, 1200, "Чёрный"),
+                new Skirt(Size.S, 700, "Красный"),
+                new Tie(Size.XS, 300, "Зелёный")
+        };
+
+        Atelier atelier = new Atelier();
+        System.out.println("Одежда для мужчин:");
+        atelier.dressMan(clothes);
+
+        System.out.println("\nОдежда для женщин:");
+        atelier.dressWoman(clothes);
+    }
+}
+
+
 
 
